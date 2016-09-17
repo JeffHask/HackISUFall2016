@@ -11,9 +11,14 @@ import {
   MKSpinner
 } from 'react-native-material-kit';
 
-export default function Captioned() {
-  return <View refreshing={true}>
+
+export default function Captioned({ tagText, styles }) {
+
+  console.log('Captioned: ' +  tagText);
+  return (
+    <View>
     <Text>Loading...</Text>
-    <MKSpinner />
+    {tagText === '' ? <MKSpinner /> : <Text>{tagText}</Text>}
   </View>
+  );
 }

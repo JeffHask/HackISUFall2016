@@ -10,6 +10,8 @@ import com.facebook.react.ReactPackage;
 import com.facebook.react.shell.MainReactPackage;
 import com.imagepicker.ImagePickerPackage;
 import com.github.xinthink.rnmk.ReactMaterialKitPackage;
+import com.zmxv.RNSound.RNSoundPackage;
+
 
 import java.util.Arrays;
 import java.util.List;
@@ -27,7 +29,8 @@ public class MainApplication extends Application implements ReactApplication {
       return Arrays.<ReactPackage>asList(
           new MainReactPackage(),
           new ImagePickerPackage(),
-          new ReactMaterialKitPackage()
+          new ReactMaterialKitPackage(),
+          new RNSoundPackage()
       );
     }
   };

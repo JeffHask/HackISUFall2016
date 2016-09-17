@@ -1,6 +1,8 @@
 package com.hackisufall2016;
 
 import com.facebook.react.ReactActivity;
+import com.zmxv.RNSound.RNSoundPackage; // <-- New
+
 
 public class MainActivity extends ReactActivity {
 

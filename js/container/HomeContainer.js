@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import Home from './../component/Home.js';
 import ImagePicker from 'react-native-image-picker';
-import { StyleSheet } from 'react-native';
+import { StyleSheet, Picker } from 'react-native';
 import CaptionContainer from './CaptionContainer';
 
 
@@ -11,9 +11,12 @@ export default class HomeContainer extends Component {
     this.state = {
     imageSource:'',
       tagText: '',
+      captionType: 'dank',
+      image: {data: ''},
     };
     this.selectImage = this.selectImage.bind(this);
     this.nextPage = this.nextPage.bind(this);
+    this.changePicker = this.changePicker.bind(this);
   }
 
   selectImage(){
@@ -28,15 +31,7 @@ export default class HomeContainer extends Component {
       else {
 
         // Do something with the selected image
-        this.setState({imageSource: response.path});
-        Clarifai.getTagsByImageBytes(response.data).then(
-          (res) => {
-            this.setState({tagText:res.results[0].result.tag.classes.toString()});
-            console.log(res);
-          },
-          (error)=>{
-            console.log(error);
-          });
+        this.setState({imageSource: response.uri, image: response});
 
       }
     });
@@ -45,8 +40,16 @@ export default class HomeContainer extends Component {
   nextPage() {
     this.props.toRoute({
       name: "Here ya go, yarr",
-      component: CaptionContainer
+      component: CaptionContainer,
+      passProps: {
+        image: this.state.image,
+      }
     });
+
+  }
+
+  changePicker(caption) {
+    this.setState({captionType: caption});
   }
 
   render() {
@@ -56,6 +59,8 @@ export default class HomeContainer extends Component {
       imageSource={this.state.imageSource}
       tagText={this.state.tagText}
       nextPage={this.nextPage}
+      changePicker={this.changePicker}
+      selectValue={this.state.captionType}
       />
   }
 }
@@ -63,14 +68,15 @@ export default class HomeContainer extends Component {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    paddingTop: 50,
+    paddingTop: 20,
     justifyContent: 'flex-start',
     alignItems: 'center',
     backgroundColor: '#F5FCFF',
   },
   image: {
-    width: 200,
-    height:200
+    width: 400,
+    height:400,
+    marginTop: 20
   }
 });
 
