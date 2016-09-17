@@ -64,7 +64,7 @@ export default class HomeContainer extends Component {
       />
   }
 }
-
+const fontFamily = "HelveticaNeue-CondensedBold";
 const styles = StyleSheet.create({
   container: {
     flex: 1,
@@ -77,7 +77,30 @@ const styles = StyleSheet.create({
     width: 400,
     height:400,
     marginTop: 20
+  },
+  backdropViewTop: {
+    height: 400,
+    width: 400,
+    backgroundColor: 'rgba(0,0,0,0)',
+    flexDirection: 'column',
+    justifyContent: 'space-between'
+  },
+  backdropViewBottom: {
+    height: 200,
+    width: 400,
+    backgroundColor: 'black',
+  },
+  text: {
+    fontSize: 72,
+    fontFamily: fontFamily,
+    textAlign: 'center',
+    backgroundColor: 'rgba(0,0,0,0)',
+    color: 'white'
+  },
+  textBorder: {
+
   }
+
 });
 
 const options = {

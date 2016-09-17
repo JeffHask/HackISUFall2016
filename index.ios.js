@@ -13,10 +13,11 @@ import {
     TouchableHighlight,
     Image
 } from 'react-native';
-// import ImagePicker from 'react-native-image-picker';
 import Clarifai from 'clarifai';
 import HomeContainer from './js/container/HomeContainer';
 import NavbarContainer from './js/container/NavbarContainer';
+import CaptionContainer from './js/container/CaptionContainer';
+import Router from 'react-native-simple-router';
 
 var options = {
   title: 'Select an Image',
@@ -34,16 +35,35 @@ class HackISUFall2016 extends Component {
       'clientId': 'tku4bZfynYXXz7EFGlYX3_rYkFxrA3A929X9Gl2l',
       'clientSecret': 'zpMXJQ50UQL9adbDD-ddQlu-QXaS2F_yzeY7lc91'
     });
+    this.nextPage = this.nextPage.bind(this);
+  }
+
+  nextPage() {
+    this.props.toRoute({
+      name: "Here ya go, yarr",
+      component: CaptionContainer
+    });
   }
 
   render() {
     return (
-        <View>
-          <NavbarContainer />
-          <HomeContainer />
-        </View>
+        <Router
+            firstRoute={firstRoute}
+            headerStyle={styles.header}
+        />
     );
   }
 }
+
+const styles = StyleSheet.create({
+  header: {
+    backgroundColor: '#5cafec',
+  },
+});
+
+const firstRoute = {
+  name: 'Welcome!',
+  component: HomeContainer,
+};
 
 AppRegistry.registerComponent('HackISUFall2016', () => HackISUFall2016);
