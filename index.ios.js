@@ -6,48 +6,44 @@
 
 import React, { Component } from 'react';
 import {
-  AppRegistry,
-  StyleSheet,
-  Text,
-  View
+    AppRegistry,
+    StyleSheet,
+    Text,
+    View,
+    TouchableHighlight,
+    Image
 } from 'react-native';
+// import ImagePicker from 'react-native-image-picker';
+import Clarifai from 'clarifai';
+import HomeContainer from './js/container/HomeContainer';
+import NavbarContainer from './js/container/NavbarContainer';
+
+var options = {
+  title: 'Select an Image',
+  storageOptions: {
+    skipBackup: true,
+  },
+  maxWidth: 480
+};
 
 class HackISUFall2016 extends Component {
+  constructor() {
+    super();
+    // Get Clarifai API client ready before user choose any image
+    Clarifai.initialize({
+      'clientId': 'tku4bZfynYXXz7EFGlYX3_rYkFxrA3A929X9Gl2l',
+      'clientSecret': 'zpMXJQ50UQL9adbDD-ddQlu-QXaS2F_yzeY7lc91'
+    });
+  }
+
   render() {
     return (
-      <View style={styles.container}>
-        <Text style={styles.welcome}>
-          Welcome to React Native!
-        </Text>
-        <Text style={styles.instructions}>
-          To get started, edit index.ios.js
-        </Text>
-        <Text style={styles.instructions}>
-          Press Cmd+R to reload,{'\n'}
-          Cmd+D or shake for dev menu
-        </Text>
-      </View>
+        <View>
+          <NavbarContainer />
+          <HomeContainer />
+        </View>
     );
   }
 }
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
-    backgroundColor: '#F5FCFF',
-  },
-  welcome: {
-    fontSize: 20,
-    textAlign: 'center',
-    margin: 10,
-  },
-  instructions: {
-    textAlign: 'center',
-    color: '#333333',
-    marginBottom: 5,
-  },
-});
 
 AppRegistry.registerComponent('HackISUFall2016', () => HackISUFall2016);
