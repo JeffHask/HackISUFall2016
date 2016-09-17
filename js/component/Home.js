@@ -8,17 +8,29 @@ import {
   Image
 } from 'react-native';
 
-export default function Home({ styles, selectImage, imageSource, tagText }) {
+const MK = require('react-native-material-kit');
+
+const {
+  MKButton,
+  MKColor,
+} = MK;
+
+export default function Home({ styles, selectImage, imageSource, tagText, nextPage }) {
+  const ColoredRaisedButton = MKButton.coloredButton()
+    .withText('Select or Take Picture')
+    .withOnPress(selectImage)
+    .build();
   return (
     <View style={styles.container}>
-      <TouchableHighlight onPress={selectImage}>
-        <Text>Select an image</Text>
-      </TouchableHighlight>
+      {/*<TouchableHighlight onPress={nextPage}>*/}
+        <ColoredRaisedButton />
+      {/*</TouchableHighlight>*/}
       <Image
         source={{uri: imageSource}}
         style={styles.image}
       />
       <Text>{tagText}</Text>
+
     </View>
   );
 }

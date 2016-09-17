@@ -2,16 +2,18 @@ import React, { Component } from 'react';
 import Home from './../component/Home.js';
 import ImagePicker from 'react-native-image-picker';
 import { StyleSheet } from 'react-native';
+import CaptionContainer from './CaptionContainer';
 
 
 export default class HomeContainer extends Component {
   constructor() {
     super();
     this.state = {
-    imageSource:'https://community.clarifai.com/uploads/default/_emoji/clarifai.png',
+    imageSource:'',
       tagText: '',
     };
     this.selectImage = this.selectImage.bind(this);
+    this.nextPage = this.nextPage.bind(this);
   }
 
   selectImage(){
@@ -40,6 +42,12 @@ export default class HomeContainer extends Component {
     });
   }
 
+  nextPage() {
+    this.props.toRoute({
+      name: "Here ya go, yarr",
+      component: CaptionContainer
+    });
+  }
 
   render() {
     return <Home
@@ -47,6 +55,7 @@ export default class HomeContainer extends Component {
       selectImage={this.selectImage}
       imageSource={this.state.imageSource}
       tagText={this.state.tagText}
+      nextPage={this.nextPage}
       />
   }
 }
@@ -54,7 +63,8 @@ export default class HomeContainer extends Component {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    justifyContent: 'center',
+    paddingTop: 50,
+    justifyContent: 'flex-start',
     alignItems: 'center',
     backgroundColor: '#F5FCFF',
   },
