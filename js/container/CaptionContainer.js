@@ -17,11 +17,16 @@ export default class CaptionContainer extends Component {
 
     this.state = {
       tagText: '',
-      shareLinkContent: {
-        contentType: 'link',
-        contentUrl: "https://facebook.com",
-        contentDescription: 'Wow, check out this great site!',
-      }
+      sharePhotoContent: {
+        contentType: 'photo',
+        photos: []
+      },
+      sharePhoto : {
+      imageUrl: '',// <diff_path_for_ios>
+      userGenerated: false,
+      caption: 'hello'
+    }
+
     };
     this.saveImage = this.saveImage.bind(this);
     this.shareLinkWithShareDialog = this.shareLinkWithShareDialog.bind(this);
@@ -60,26 +65,41 @@ export default class CaptionContainer extends Component {
     }
 
   shareLinkWithShareDialog() {
-    var tmp = this;
-    ShareDialog.canShow(this.state.shareLinkContent).then(
-      function (canShow) {
-        if (canShow) {
-          return ShareDialog.show(tmp.state.shareLinkContent);
-        }
-      }
-    ).then(
-      function (result) {
-        if (result.isCancelled) {
-          alert('Share cancelled');
-        } else {
-          alert('Share success with postId: '
-            + result.postId);
-        }
-      },
-      function (error) {
-        alert('Share fail with error: ' + error);
-      }
+    let thingyUri;
+    RNViewShot.takeSnapshot(this.refs.captioned.refs.memeImage, {
+      format: "jpeg",
+      quality: 0.8
+    }).then(
+      uri => this.setState({sharePhoto : {
+        imageUrl: uri,
+        userGenerated: false,
+        caption: 'Created using Aye Aye Caption'
+      }})
     );
+    let sendToFaceBook = this.state.sharePhotoContent;
+    if (this.state.sharePhoto.imageUrl != undefined) {
+      sendToFaceBook.photos = [this.state.sharePhoto];
+      var tmp = this;
+      ShareDialog.canShow(sendToFaceBook).then(
+        function (canShow) {
+          if (canShow) {
+            return ShareDialog.show(sendToFaceBook);
+          }
+        }
+      ).then(
+        function (result) {
+          if (result.isCancelled) {
+            alert('Share cancelled');
+          } else {
+            alert('Share success with postId: '
+              + result.postId);
+          }
+        },
+        function (error) {
+          alert('Share fail with error: ' + error);
+        }
+      );
+    }
   }
   render() {
     // console.log('TAG TEXT: ' + this.state.tagText);

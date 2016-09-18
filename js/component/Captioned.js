@@ -44,8 +44,10 @@ export default class Captioned extends React.Component {
       .withText('Share Image On Facebook')
       .withOnPress(this.props.facebookShare)
       .withStyle({
-        width: 160,
-        height: 40
+        width: 425,
+        height: 70,
+        position: 'absolute',
+        bottom:0,
       })
       .withTextStyle({
         fontSize: 21,
