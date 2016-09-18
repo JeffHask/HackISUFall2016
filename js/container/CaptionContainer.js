@@ -3,6 +3,7 @@ import Captioned from './../component/Captioned';
 import { StyleSheet, Image } from 'react-native';
 import Sound from 'react-native-sound';
 var Platform = require('react-native').Platform;
+import RNViewShot from "react-native-view-shot";
 
 export default class CaptionContainer extends Component {
   constructor(props) {
@@ -11,7 +12,8 @@ export default class CaptionContainer extends Component {
 
     this.state = {
       tagText: ''
-    }
+    };
+    this.saveImage = this.saveImage.bind(this);
   }
 
   componentDidMount() {
@@ -32,10 +34,26 @@ export default class CaptionContainer extends Component {
       });
   }
 
+  saveImage() {
+      // console.log(this.refs.home.refs.imageMe);
+      RNViewShot.takeSnapshot(this.refs.captioned.refs.memeImage, {
+          format: "jpeg",
+          quality: 0.8
+      })
+          .then(
+              uri => CameraRoll.saveToCameraRoll("file://" + uri, 'photo'),
+
+              error => console.error("Oops, snapshot failed", error)
+          );
+    }
+
   render() {
     console.log('TAG TEXT: ' + this.state.tagText);
     console.log('image source: ' + this.props.imageSource);
-    return <Captioned tagText={this.state.tagText} styles={styles} imageSource={this.props.imageSource} />;
+    return <Captioned tagText={this.state.tagText}
+                      saveImage={this.saveImage}
+                      styles={styles} imageSource={this.props.imageSource}
+                      ref="captioned" />;
   }
 }
 

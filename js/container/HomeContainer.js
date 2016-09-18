@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { Component, CameraRoll } from 'react';
 import Home from './../component/Home.js';
 import ImagePicker from 'react-native-image-picker';
 import { StyleSheet, Picker } from 'react-native';
