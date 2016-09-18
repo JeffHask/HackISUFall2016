@@ -22,13 +22,15 @@ export default class CaptionContainer extends Component {
         photos: []
       },
       sharePhoto : {
-      imageUrl: '',// <diff_path_for_ios>
-      userGenerated: false,
-      caption: 'hello'
-    },
-      captions: ''
+        imageUrl: '',// <diff_path_for_ios>
+        userGenerated: false,
+        caption: 'hello'
+      },
+      captions: '',
+      shuffle: 0
     };
     this.saveImage = this.saveImage.bind(this);
+    this.shuffle = this.shuffle.bind(this);
     this.shareLinkWithShareDialog = this.shareLinkWithShareDialog.bind(this);
   }
 
@@ -122,10 +124,17 @@ export default class CaptionContainer extends Component {
       );
     }
   }
+
+  shuffle() {
+    this.setState({shuffle: Math.floor(Math.random() * (15))});
+  }
+
   render() {
     // console.log('TAG TEXT: ' + this.state.tagText);
     console.log('image source: ' + this.props.imageSource);
     return <Captioned
+      shuffle={this.state.shuffle}
+      shuffleImage={this.shuffle}
       tagText={this.state.tagText}
       captions={this.state.captions}
       saveImage={this.saveImage}

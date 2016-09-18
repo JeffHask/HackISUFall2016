@@ -40,6 +40,19 @@ export default class Captioned extends React.Component {
       })
         .build();
 
+    const Shuffle = MKButton.coloredButton()
+      .withText('Shuffle')
+      .withOnPress(this.props.shuffleImage)
+      .withStyle({
+          width: 160,
+          height: 40
+      })
+      .withTextStyle({
+          fontSize: 21,
+          color: 'white'
+      })
+      .build();
+
     const ShareImage = MKButton.coloredButton()
       .withText('Share Image On Facebook')
       .withOnPress(this.props.facebookShare)
@@ -55,8 +68,8 @@ export default class Captioned extends React.Component {
       })
       .build();
 
-    const topText = this.props.captions != ''? this.props.captions[0].topText.toUpperCase() : '';
-    const bottomText = this.props.captions != '' ? this.props.captions[0].bottomText.toUpperCase() : '';
+    const topText = this.props.captions != ''? this.props.captions[this.props.shuffle].topText.toUpperCase() : '';
+    const bottomText = this.props.captions != '' ? this.props.captions[this.props.shuffle].bottomText.toUpperCase() : '';
     
     let imageComp = this.props.imageSource !== '' ? <Image
       source={{uri: this.props.imageSource, isStatic: true}}
@@ -73,6 +86,7 @@ export default class Captioned extends React.Component {
           { imageComp }
           <SaveImage />
         <ShareImage />
+        <Shuffle />
       </View>
     );
   }
