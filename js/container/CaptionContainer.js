@@ -16,10 +16,31 @@ export default class CaptionContainer extends Component {
     this.saveImage = this.saveImage.bind(this);
   }
 
+  _fetchData(result) {
+
+    fetch('https://captionserver.herokuapp.com/api/captions', {
+      method: 'POST',
+      headers: {
+        'Accept': 'application/json',
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({
+        result: result
+      })
+    })
+        .then((response) => response.json())
+        .then((responseData) => {
+
+          console.log("THIS IS NEWER:" + JSON.stringify(responseData));
+          this.setState({captions:responseData});
+        })
+        .done();
+  }
+
   componentDidMount() {
     Clarifai.getTagsByImageBytes(this.props.image.data).then(
       (res) => {
-        this.setState({captions:getCaptions(res.results[0].result)});
+        this._fetchData(res.results[0].result);
         let airhorn = new Sound('airhorn.mp3', Sound.MAIN_BUNDLE, (e) => {
           if (e) {
             console.log('error');
@@ -50,10 +71,9 @@ export default class CaptionContainer extends Component {
 
   render() {
     // console.log('TAG TEXT: ' + this.state.tagText);
-    var captions = this.state.captions;
     console.log('image source: ' + this.props.imageSource);
-    console.log('captions:' + JSON.stringify(captions));
-    return <Captioned captions={captions}
+    console.log('captions:' + JSON.stringify(this.state.captions));
+    return <Captioned captions={this.state.captions}
                       saveImage={this.saveImage}
                       styles={styles} imageSource={this.props.imageSource}
                       ref="captioned" />;
