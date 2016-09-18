@@ -113,7 +113,7 @@ const styles = StyleSheet.create({
     backgroundColor: 'black',
   },
   text: {
-    fontSize: 54,
+    fontSize: 42,
     fontFamily: fontFamily,
     textAlign: 'center',
     backgroundColor: 'rgba(0,0,0,0)',
@@ -126,24 +126,3 @@ const styles = StyleSheet.create({
     textShadowColor: '#000'
   }
 });
-
-function getCaptions(result) {
-  console.log("HELLO:" + JSON.stringify(result));
-  fetch('https://captionserver.herokuapp.com/api/captions', {
-    method: 'POST',
-    headers: {
-      'Accept': 'application/json',
-      'Content-Type': 'application/json',
-    },
-    body: JSON.stringify({
-      result: result
-    })
-  })
-  .then((response) => response.json())
-  .then((responseData) => {
-
-    console.log("THIS IS NEWER:" + JSON.stringify(responseData));
-    this.setState({captions:responseData});
-  })
-  .done();
-}
