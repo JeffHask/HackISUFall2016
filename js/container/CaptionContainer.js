@@ -176,7 +176,7 @@ const styles = StyleSheet.create({
     backgroundColor: 'black',
   },
   text: {
-    fontSize: 42,
+    fontSize: 35,
     fontFamily: fontFamily,
     textAlign: 'center',
     backgroundColor: 'rgba(0,0,0,0)',
