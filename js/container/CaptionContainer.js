@@ -177,11 +177,11 @@ function getCaptions(result) {
       result: result
     })
   })
-  // .then((response) => response.json())
-      .then((responseData) => {
+  .then((response) => response.json())
+  .then((responseData) => {
 
-        console.log("THIS IS NEWER:" + JSON.stringify(responseData));
-        this.setState({captions:responseData});
-      })
+    console.log("THIS IS NEWER:" + JSON.stringify(responseData));
+    this.setState({captions:responseData});
+  })
   .done();
 }
