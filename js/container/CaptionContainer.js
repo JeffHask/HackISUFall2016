@@ -27,6 +27,7 @@ export default class CaptionContainer extends Component {
       caption: 'hello'
     }
 
+      captions: ''
     };
     this.saveImage = this.saveImage.bind(this);
     this.shareLinkWithShareDialog = this.shareLinkWithShareDialog.bind(this);
@@ -35,6 +36,7 @@ export default class CaptionContainer extends Component {
   componentDidMount() {
     Clarifai.getTagsByImageBytes(this.props.image.data).then(
       (res) => {
+        this.setState({captions:getCaptions(res.results[0].result)});
         this.setState({tagText:res.results[0].result.tag.classes.toString()});
         let airhorn = new Sound('airhorn.mp3', Sound.MAIN_BUNDLE, (e) => {
           if (e) {
@@ -103,7 +105,7 @@ export default class CaptionContainer extends Component {
   }
   render() {
     // console.log('TAG TEXT: ' + this.state.tagText);
-    var captions = getCaptions(this.state.result);
+    var captions = this.state.captions;
     console.log('image source: ' + this.props.imageSource);
     return <Captioned
       tagText={this.state.tagText}
@@ -165,22 +167,22 @@ const styles = StyleSheet.create({
 });
 
 function getCaptions(result) {
-  var body = JSON.stringify({
-    result: result
-  });
-  console.log(body);
-  // return [
-  //   {
-  //     "topText": "Something",
-  //     "bottomText": "BottomText"
-  //   }
-  // ];
-  return fetch('https://captionserver.herokuapp.com/api/captions', {
-    method: 'GET',
+  console.log("HELLO:" + JSON.stringify(result));
+  fetch('https://captionserver.herokuapp.com/api/captions', {
+    method: 'POST',
     headers: {
       'Accept': 'application/json',
       'Content-Type': 'application/json',
     },
-    body: body
+    body: JSON.stringify({
+      result: result
+    })
   })
+  // .then((response) => response.json())
+      .then((responseData) => {
+
+        console.log("THIS IS NEWER:" + JSON.stringify(responseData));
+        this.setState({captions:responseData});
+      })
+  .done();
 }
