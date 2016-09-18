@@ -157,15 +157,15 @@ const styles = StyleSheet.create({
     backgroundColor: '#EEEEEE'
   },
   image: {
-    width: 400,
-    height: 400,
+    width: 350,
+    height: 350,
     marginTop: 5,
     alignItems: 'center',
-    marginBottom: 50
+    marginBottom: 30
   },
   backdropViewTop: {
-    height: 400,
-    width: 400,
+    height: 350,
+    width: 350,
     backgroundColor: 'rgba(0,0,0,0)',
     flexDirection: 'column',
     justifyContent: 'space-between'
@@ -176,7 +176,7 @@ const styles = StyleSheet.create({
     backgroundColor: 'black',
   },
   text: {
-    fontSize: 42,
+    fontSize: 35,
     fontFamily: fontFamily,
     textAlign: 'center',
     backgroundColor: 'rgba(0,0,0,0)',

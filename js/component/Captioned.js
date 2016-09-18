@@ -45,7 +45,8 @@ export default class Captioned extends React.Component {
       .withOnPress(this.props.shuffleImage)
       .withStyle({
           width: 160,
-          height: 40
+          height: 40,
+          marginLeft: 5
       })
       .withTextStyle({
           fontSize: 21,
@@ -58,7 +59,7 @@ export default class Captioned extends React.Component {
       .withOnPress(this.props.facebookShare)
       .withStyle({
         width: 425,
-        height: 70,
+        height: 40,
         position: 'absolute',
         bottom:0,
       })
@@ -83,11 +84,14 @@ export default class Captioned extends React.Component {
     </Image> : <Text></Text>;
   return (
     <View style={this.props.styles.container}>
-          { imageComp }
-          <SaveImage />
-        <ShareImage />
+      { imageComp }
+      <View style={{flexDirection:'row', flexWrap:'wrap'}}>
+        <SaveImage />
         <Shuffle />
-      </View>
+        </View>
+      <ShareImage />
+
+    </View>
     );
   }
 }

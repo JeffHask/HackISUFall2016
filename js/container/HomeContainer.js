@@ -39,7 +39,7 @@ export default class HomeContainer extends Component {
 
   nextPage() {
     this.props.toRoute({
-      name: "Here ya go, yarr",
+      name: "Here Do Be Meme",
       component: CaptionContainer,
       passProps: {
         image: this.state.image,
@@ -78,8 +78,8 @@ const styles = StyleSheet.create({
   image: {
     width: 350,
     height:350,
-    marginTop: 20,
-    marginBottom: 20
+    marginTop: 10,
+    marginBottom: 10
   },
   textStyle: {
     color: 'white',
