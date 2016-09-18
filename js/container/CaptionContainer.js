@@ -19,7 +19,7 @@ export default class CaptionContainer extends Component {
   componentDidMount() {
     Clarifai.getTagsByImageBytes(this.props.image.data).then(
       (res) => {
-        this.setState({tagText:res.results[0].result.tag.classes.toString()});
+        this.setState({result:res.results[0].result});
         let airhorn = new Sound('airhorn.mp3', Sound.MAIN_BUNDLE, (e) => {
           if (e) {
             console.log('error');
@@ -49,9 +49,11 @@ export default class CaptionContainer extends Component {
     }
 
   render() {
-    console.log('TAG TEXT: ' + this.state.tagText);
+    // console.log('TAG TEXT: ' + this.state.tagText);
+    var captions = getCaptions(this.state.result);
     console.log('image source: ' + this.props.imageSource);
-    return <Captioned tagText={this.state.tagText}
+    console.log('captions:' + JSON.stringify(captions));
+    return <Captioned captions={captions}
                       saveImage={this.saveImage}
                       styles={styles} imageSource={this.props.imageSource}
                       ref="captioned" />;
@@ -105,3 +107,23 @@ const styles = StyleSheet.create({
   }
 });
 
+function getCaptions(result) {
+  var body = JSON.stringify({
+    result: result
+  });
+  console.log(body);
+  // return [
+  //   {
+  //     "topText": "Something",
+  //     "bottomText": "BottomText"
+  //   }
+  // ];
+  return fetch('https://captionserver.herokuapp.com/api/captions', {
+    method: 'GET',
+    headers: {
+      'Accept': 'application/json',
+      'Content-Type': 'application/json',
+    },
+    body: body
+  })
+}
