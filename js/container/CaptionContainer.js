@@ -56,7 +56,6 @@ export default class CaptionContainer extends Component {
   componentDidMount() {
     Clarifai.getTagsByImageBytes(this.props.image.data).then(
       (res) => {
-        this._fetchData(res.results[0].result);
         let airhorn = new Sound('airhorn.mp3', Sound.MAIN_BUNDLE, (e) => {
           if (e) {
             console.log('error');
@@ -65,6 +64,7 @@ export default class CaptionContainer extends Component {
             airhorn.play();
           }
         });
+        this._fetchData(res.results[0].result);
       },
       (error)=>{
         console.log(error);
@@ -110,14 +110,11 @@ export default class CaptionContainer extends Component {
       ).then(
         function (result) {
           if (result.isCancelled) {
-            alert('Share cancelled');
           } else {
-            alert('Share success with postId: '
-              + result.postId);
           }
         },
         function (error) {
-          alert('Share fail with error: ' + error);
+
         }
       );
     }
