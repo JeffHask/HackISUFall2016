@@ -26,6 +26,7 @@ export default class Captioned extends React.Component {
         .withText('Save Image')
         .withOnPress(this.props.saveImage)
         .build();
+
     let imageComp = this.props.imageSource !== '' ? <Image
       source={{uri: this.props.imageSource, isStatic: true}}
       style={this.props.styles.image}
@@ -36,33 +37,20 @@ export default class Captioned extends React.Component {
         <Text style={this.props.styles.text}>BottomText</Text>
       </View>
     </Image> : <Text></Text>;
-    return (
-      <View>
-      {this.props.tagText === '' ?<MKSpinner /> :
-  let imageComp = imageSource !== '' ? <Image
-    source={{uri: imageSource, isStatic: true}}
-    style={styles.image} >
-
-    <View style={styles.backdropViewTop}>
-      <Text style={styles.text}>TopText</Text>
-      <Text style={styles.text}>BottomText</Text>
-    </View>
-  </Image> : <Text></Text>;
   return (
-    <View style={styles.container}>
-    {tagText === '' ?<MKSpinner /> :
+    <View style={this.props.styles.container}>
+      {this.props.tagText === '' ? <MKSpinner /> :
 
-          <View style={styles.container>
-            { imageComp }
-            <Text>
-              {this.props.tagText}
-            </Text>
-            <SaveImage />
-          </View>
+        <View style={this.props.styles.container}>
+          { imageComp }
+          <Text>
+            {this.props.tagText}
+          </Text>
+          <SaveImage />
+        </View>
 
-          }
+      }
       </View>
     );
   }
-  );
 }

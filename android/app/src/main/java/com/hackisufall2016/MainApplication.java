@@ -11,6 +11,7 @@ import com.facebook.react.shell.MainReactPackage;
 import com.imagepicker.ImagePickerPackage;
 import com.github.xinthink.rnmk.ReactMaterialKitPackage;
 import com.zmxv.RNSound.RNSoundPackage;
+import fr.greweb.reactnativeviewshot.RNViewShotPackage;
 
 
 import java.util.Arrays;
@@ -30,7 +31,8 @@ public class MainApplication extends Application implements ReactApplication {
           new MainReactPackage(),
           new ImagePickerPackage(),
           new ReactMaterialKitPackage(),
-          new RNSoundPackage()
+          new RNSoundPackage(),
+          new RNViewShotPackage()
       );
     }
   };

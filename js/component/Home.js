@@ -24,12 +24,12 @@ export default class Home extends React.Component {
   render() {
     const ColoredRaisedButton = MKButton.coloredButton()
       .withText('Select or Take Picture')
-      .withOnPress(props.selectImage)
+      .withOnPress(this.props.selectImage)
       .withStyle()
       .build();
     const GenerateButton = MKButton.coloredButton()
       .withText('Meme-ifai')
-      .withOnPress(props.nextPage)
+      .withOnPress(this.props.nextPage)
       .withStyle({
         height: 50
       })
@@ -41,12 +41,12 @@ export default class Home extends React.Component {
       })
       .build();
     return (
-      <View style={props.styles.container}>
+      <View style={this.props.styles.container}>
         <ColoredRaisedButton  />
-        {props.imageSource !== '' ?
+        {this.props.imageSource !== '' ?
           <View><Image
-            source={{uri: props.imageSource, isStatic: true}}
-            style={props.styles.image}
+            source={{uri: this.props.imageSource, isStatic: true}}
+            style={this.props.styles.image}
           >
           </Image><GenerateButton /></View> : <Text></Text> }
       </View>

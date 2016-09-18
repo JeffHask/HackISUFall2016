@@ -2,6 +2,7 @@ package com.hackisufall2016;
 
 import com.facebook.react.ReactActivity;
 import com.zmxv.RNSound.RNSoundPackage;
+import fr.greweb.reactnativeviewshot.RNViewShotPackage;
 
 public class MainActivity extends ReactActivity {
 
