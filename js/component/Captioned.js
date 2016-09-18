@@ -22,10 +22,6 @@ export default class Captioned extends React.Component {
       contentUrl: "https://facebook.com",
       contentDescription: 'Wow, check out this great site!',
     };
-    console.log('Captioned: ' +  this.props.tagText);
-    console.log('Captioned imagio: ' + this.props.imageSource);
-    console.log('Captioned: ' + this.props.imageSource);
-
 
     const SaveImage = MKButton.coloredButton()
         .withText('Save Image')

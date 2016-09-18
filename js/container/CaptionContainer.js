@@ -49,7 +49,6 @@ export default class CaptionContainer extends Component {
         .then((response) => response.json())
         .then((responseData) => {
 
-          console.log("THIS IS NEWER:" + JSON.stringify(responseData));
           this.setState({captions:responseData});
         })
         .done();
@@ -62,7 +61,6 @@ export default class CaptionContainer extends Component {
           if (e) {
             console.log('error');
           } else {
-            console.log('duration', airhorn.getDuration());
             airhorn.play();
           }
         });
@@ -74,7 +72,6 @@ export default class CaptionContainer extends Component {
   }
 
   saveImage() {
-      // console.log(this.refs.home.refs.imageMe);
       RNViewShot.takeSnapshot(this.refs.captioned.refs.memeImage, {
           format: "jpeg",
           quality: 0.8
@@ -88,7 +85,6 @@ export default class CaptionContainer extends Component {
     }
 
   shareLinkWithShareDialog() {
-    let thingyUri;
     RNViewShot.takeSnapshot(this.refs.captioned.refs.memeImage, {
       format: "jpeg",
       quality: 0.8
@@ -123,12 +119,10 @@ export default class CaptionContainer extends Component {
   }
 
   shuffle() {
-    this.setState({shuffle: Math.floor(Math.random() * (25))});
+    this.setState({shuffle: Math.floor(Math.random() * (24))});
   }
 
   render() {
-    // console.log('TAG TEXT: ' + this.state.tagText);
-    console.log('image source: ' + this.props.imageSource);
     return <Captioned
       shuffle={this.state.shuffle}
       shuffleImage={this.shuffle}
