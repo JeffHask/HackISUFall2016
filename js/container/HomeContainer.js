@@ -3,6 +3,7 @@ import Home from './../component/Home.js';
 import ImagePicker from 'react-native-image-picker';
 import { StyleSheet, Picker } from 'react-native';
 import CaptionContainer from './CaptionContainer';
+var Platform = require('react-native').Platform;
 
 export default class HomeContainer extends Component {
   constructor() {
@@ -64,6 +65,8 @@ export default class HomeContainer extends Component {
       />
   }
 }
+
+const fontFamily = Platform.OS === 'ios' ? "HelveticaNeue-CondensedBold" : 'impact';
 const styles = StyleSheet.create({
   container: {
     flex: 1,
@@ -77,6 +80,12 @@ const styles = StyleSheet.create({
     height:350,
     marginTop: 20,
     marginBottom: 20
+  },
+  textStyle: {
+    color: 'white',
+    fontWeight: 'bold',
+    fontFamily: fontFamily,
+    fontSize: 42
   }
 });
 

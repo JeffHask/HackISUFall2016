@@ -20,6 +20,7 @@ MK.setTheme({
   primaryColor: '#7E57C2',
   accentColor: MKColor.Teal
 });
+
 export default class Home extends React.Component {
   render() {
     const ColoredRaisedButton = MKButton.coloredButton()
@@ -33,12 +34,7 @@ export default class Home extends React.Component {
       .withStyle({
         height: 50
       })
-      .withTextStyle({
-        color: 'white',
-        fontWeight: 'bold',
-        fontFamily: 'impact',
-        fontSize: 48
-      })
+      .withTextStyle(this.props.styles.textStyle)
       .build();
     return (
       <View style={this.props.styles.container}>

@@ -59,8 +59,8 @@ export default class Captioned extends React.Component {
       ref="memeImage" >
 
       <View style={this.props.styles.backdropViewTop}>
-        <Text style={this.props.styles.text}>TopText</Text>
-        <Text style={this.props.styles.text}>BottomText</Text>
+        <Text style={this.props.styles.text}>{this.props.captions.topText}</Text>
+        <Text style={this.props.styles.text}>{this.props.captions.bottomText}</Text>
       </View>
     </Image> : <Text></Text>;
   return (
