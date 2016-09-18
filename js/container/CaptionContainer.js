@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import Captioned from './../component/Captioned';
-import { StyleSheet, Image } from 'react-native';
+import { StyleSheet, Image, CameraRoll, ToastAndroid } from 'react-native';
 import Sound from 'react-native-sound';
 var Platform = require('react-native').Platform;
 import RNViewShot from "react-native-view-shot";
@@ -41,10 +41,11 @@ export default class CaptionContainer extends Component {
           quality: 0.8
       })
           .then(
-              uri => CameraRoll.saveToCameraRoll("file://" + uri, 'photo'),
+              uri => CameraRoll.saveToCameraRoll(uri, 'photo'),
 
-              error => console.error("Oops, snapshot failed", error)
+              error => console.log("Oops, snapshot failed")
           );
+    ToastAndroid.show('Photo Saved', ToastAndroid.SHORT);
     }
 
   render() {
@@ -73,8 +74,9 @@ const styles = StyleSheet.create({
   image: {
     width: 400,
     height: 400,
-    marginTop: 50,
-    alignItems: 'center'
+    marginTop: 5,
+    alignItems: 'center',
+    marginBottom: 50
   },
   backdropViewTop: {
     height: 400,
@@ -100,9 +102,6 @@ const styles = StyleSheet.create({
     },
     textShadowRadius: 9,
     textShadowColor: '#000'
-  },
-  textBorder: {
-
   }
 });
 

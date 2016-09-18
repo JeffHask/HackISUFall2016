@@ -25,6 +25,14 @@ export default class Captioned extends React.Component {
     const SaveImage = MKButton.coloredButton()
         .withText('Save Image')
         .withOnPress(this.props.saveImage)
+      .withStyle({
+        width: 160,
+        height: 40
+      })
+      .withTextStyle({
+        fontSize: 21,
+        color: 'white'
+      })
         .build();
 
     let imageComp = this.props.imageSource !== '' ? <Image
@@ -39,17 +47,8 @@ export default class Captioned extends React.Component {
     </Image> : <Text></Text>;
   return (
     <View style={this.props.styles.container}>
-      {this.props.tagText === '' ? <MKSpinner /> :
-
-        <View style={this.props.styles.container}>
           { imageComp }
-          <Text>
-            {this.props.tagText}
-          </Text>
           <SaveImage />
-        </View>
-
-      }
       </View>
     );
   }
