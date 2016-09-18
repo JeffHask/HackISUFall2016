@@ -1,11 +1,7 @@
 package com.hackisufall2016;
 
 import com.facebook.react.ReactActivity;
-import fr.greweb.reactnativeviewshot.RNViewShotPackage;
 import com.zmxv.RNSound.RNSoundPackage;
-import com.github.xinthink.rnmk.ReactMaterialKitPackage;
-import com.zmxv.RNSound.RNSoundPackage; // <-- New
-
 
 public class MainActivity extends ReactActivity {
 

@@ -4,7 +4,6 @@ import ImagePicker from 'react-native-image-picker';
 import { StyleSheet, Picker } from 'react-native';
 import CaptionContainer from './CaptionContainer';
 
-
 export default class HomeContainer extends Component {
   constructor() {
     super();
@@ -43,6 +42,7 @@ export default class HomeContainer extends Component {
       component: CaptionContainer,
       passProps: {
         image: this.state.image,
+        imageSource : this.state.imageSource
       }
     });
 
@@ -64,7 +64,6 @@ export default class HomeContainer extends Component {
       />
   }
 }
-const fontFamily = "HelveticaNeue-CondensedBold";
 const styles = StyleSheet.create({
   container: {
     flex: 1,
@@ -74,33 +73,11 @@ const styles = StyleSheet.create({
     backgroundColor: '#F5FCFF',
   },
   image: {
-    width: 400,
-    height:400,
-    marginTop: 20
-  },
-  backdropViewTop: {
-    height: 400,
-    width: 400,
-    backgroundColor: 'rgba(0,0,0,0)',
-    flexDirection: 'column',
-    justifyContent: 'space-between'
-  },
-  backdropViewBottom: {
-    height: 200,
-    width: 400,
-    backgroundColor: 'black',
-  },
-  text: {
-    fontSize: 72,
-    fontFamily: fontFamily,
-    textAlign: 'center',
-    backgroundColor: 'rgba(0,0,0,0)',
-    color: 'white'
-  },
-  textBorder: {
-
+    width: 350,
+    height:350,
+    marginTop: 20,
+    marginBottom: 20
   }
-
 });
 
 const options = {
