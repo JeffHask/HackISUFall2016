@@ -1,9 +1,9 @@
-import React, { Component } from 'react';
+import React, { Component, CameraRoll } from 'react';
 import Home from './../component/Home.js';
 import ImagePicker from 'react-native-image-picker';
 import { StyleSheet, Picker } from 'react-native';
 import CaptionContainer from './CaptionContainer';
-
+import RNViewShot from "react-native-view-shot";
 
 export default class HomeContainer extends Component {
   constructor() {
@@ -17,6 +17,7 @@ export default class HomeContainer extends Component {
     this.selectImage = this.selectImage.bind(this);
     this.nextPage = this.nextPage.bind(this);
     this.changePicker = this.changePicker.bind(this);
+    this.saveImage = this.saveImage.bind(this);
   }
 
   selectImage(){
@@ -52,8 +53,22 @@ export default class HomeContainer extends Component {
     this.setState({captionType: caption});
   }
 
+  saveImage() {
+    // console.log(this.refs.home.refs.imageMe);
+    RNViewShot.takeSnapshot(this.refs.home.refs.imageMe, {
+      format: "jpeg",
+      quality: 0.8
+    })
+    .then(
+        uri => CameraRoll.saveToCameraRoll("file://" + uri, 'photo'),
+
+        error => console.error("Oops, snapshot failed", error)
+    );
+  }
+
   render() {
     return <Home
+        ref="home"
       styles={styles}
       selectImage={this.selectImage}
       imageSource={this.state.imageSource}
@@ -61,6 +76,7 @@ export default class HomeContainer extends Component {
       nextPage={this.nextPage}
       changePicker={this.changePicker}
       selectValue={this.state.captionType}
+      saveImage={this.saveImage}
       />
   }
 }

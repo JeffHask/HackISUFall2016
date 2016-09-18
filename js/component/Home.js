@@ -16,41 +16,50 @@ const {
   MKColor,
 } = MK;
 
-export default function Home(props) {
-  const ColoredRaisedButton = MKButton.coloredButton()
-    .withText('Select or Take Picture')
-    .withOnPress(props.selectImage)
-    .build();
-  const GenerateButton = MKButton.coloredButton()
-    .withText('Generate Picture')
-    .withOnPress(props.nextPage)
-    .build();
-  return (
-    <View style={props.styles.container}>
-        <ColoredRaisedButton  />
-      <Image
-        source={{uri: props.imageSource, isStatic: true}}
-        style={props.styles.image}
-      >
-          <View style={props.styles.backdropViewTop}>
-              <Text style={props.styles.text}>TopText</Text>
-              {/*<Text style={props.styles.textBorder}>TopText</Text>*/}
-              <Text style={props.styles.text}>BottomText</Text>
-              {/*<Text style={props.styles.textBorder}>TopText</Text>*/}
-          </View>
-          {/*<View style={props.styles.backdropViewBottom}>*/}
-              {/*<Text style={props.styles.bottomText}>BottomText</Text>*/}
-          {/*</View>*/}
-      </Image>
-      <Text>{props.tagText}</Text>
-      {/*<Picker*/}
-        {/*style={{width: 200}}*/}
-        {/*selectedValue={props.selectValue}*/}
-        {/*onValueChange={props.changePicker}>*/}
-        {/*<Picker.Item label="Funny" value="funny" />*/}
-        {/*<Picker.Item label="Meme-ify" value="dank" />*/}
-      {/*</Picker>*/}
-      <GenerateButton />
-    </View>
-  );
+export default class Home extends React.Component {
+    render() {
+      const ColoredRaisedButton = MKButton.coloredButton()
+        .withText('Select or Take Picture')
+        .withOnPress(this.props.selectImage)
+        .build();
+      const GenerateButton = MKButton.coloredButton()
+        .withText('Generate Picture')
+        .withOnPress(this.props.nextPage)
+        .build();
+      const SaveImage = MKButton.coloredButton()
+          .withText('Save Image')
+          .withOnPress(this.props.saveImage)
+          .build();
+      return (
+        <View style={this.props.styles.container}>
+            <ColoredRaisedButton  />
+          <Image
+            source={{uri: this.props.imageSource, isStatic: true}}
+            style={this.props.styles.image}
+            ref="imageMe"
+          >
+              <View style={this.props.styles.backdropViewTop}>
+                  <Text style={this.props.styles.text}>TopText</Text>
+                  {/*<Text style={this.props.styles.textBorder}>TopText</Text>*/}
+                  <Text style={this.props.styles.text}>BottomText</Text>
+                  {/*<Text style={this.props.styles.textBorder}>TopText</Text>*/}
+              </View>
+              {/*<View style={this.props.styles.backdropViewBottom}>*/}
+                  {/*<Text style={this.props.styles.bottomText}>BottomText</Text>*/}
+              {/*</View>*/}
+          </Image>
+          <Text>{this.props.tagText}</Text>
+          {/*<Picker*/}
+            {/*style={{width: 200}}*/}
+            {/*selectedValue={this.props.selectValue}*/}
+            {/*onValueChange={this.props.changePicker}>*/}
+            {/*<Picker.Item label="Funny" value="funny" />*/}
+            {/*<Picker.Item label="Meme-ify" value="dank" />*/}
+          {/*</Picker>*/}
+          <GenerateButton />
+            <SaveImage />
+        </View>
+      );
+    }
 }
+
