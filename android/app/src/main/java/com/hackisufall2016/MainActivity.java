@@ -1,5 +1,6 @@
 package com.hackisufall2016;
 
+import android.content.Intent;
 import com.facebook.react.ReactActivity;
 import com.zmxv.RNSound.RNSoundPackage;
 import fr.greweb.reactnativeviewshot.RNViewShotPackage;
@@ -14,4 +15,10 @@ public class MainActivity extends ReactActivity {
     protected String getMainComponentName() {
         return "HackISUFall2016";
     }
+
+     @Override
+        public void onActivityResult(int requestCode, int resultCode, Intent data) {
+            super.onActivityResult(requestCode, resultCode, data);
+            MainApplication.getCallbackManager().onActivityResult(requestCode, resultCode, data);
+        }
 }

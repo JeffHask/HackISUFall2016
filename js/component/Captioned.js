@@ -17,6 +17,11 @@ import {
 export default class Captioned extends React.Component {
 
   render() {
+    const shareLinkContent = {
+      contentType: 'link',
+      contentUrl: "https://facebook.com",
+      contentDescription: 'Wow, check out this great site!',
+    };
     console.log('Captioned: ' +  this.props.tagText);
     console.log('Captioned imagio: ' + this.props.imageSource);
     console.log('Captioned: ' + this.props.imageSource);
@@ -35,6 +40,19 @@ export default class Captioned extends React.Component {
       })
         .build();
 
+    const ShareImage = MKButton.coloredButton()
+      .withText('Share Image On Facebook')
+      .withOnPress(this.props.facebookShare)
+      .withStyle({
+        width: 160,
+        height: 40
+      })
+      .withTextStyle({
+        fontSize: 21,
+        color: 'white'
+      })
+      .build();
+
     let imageComp = this.props.imageSource !== '' ? <Image
       source={{uri: this.props.imageSource, isStatic: true}}
       style={this.props.styles.image}
@@ -49,6 +67,7 @@ export default class Captioned extends React.Component {
     <View style={this.props.styles.container}>
           { imageComp }
           <SaveImage />
+        <ShareImage />
       </View>
     );
   }

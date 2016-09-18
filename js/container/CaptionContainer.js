@@ -5,15 +5,26 @@ import Sound from 'react-native-sound';
 var Platform = require('react-native').Platform;
 import RNViewShot from "react-native-view-shot";
 
+const FBSDK = require('react-native-fbsdk');
+const {
+  ShareDialog,
+} = FBSDK;
+
 export default class CaptionContainer extends Component {
   constructor(props) {
 
     super(props);
 
     this.state = {
-      tagText: ''
+      tagText: '',
+      shareLinkContent: {
+        contentType: 'link',
+        contentUrl: "https://facebook.com",
+        contentDescription: 'Wow, check out this great site!',
+      }
     };
     this.saveImage = this.saveImage.bind(this);
+    this.shareLinkWithShareDialog = this.shareLinkWithShareDialog.bind(this);
   }
 
   componentDidMount() {
@@ -48,13 +59,39 @@ export default class CaptionContainer extends Component {
     ToastAndroid.show('Photo Saved', ToastAndroid.SHORT);
     }
 
+  shareLinkWithShareDialog() {
+    var tmp = this;
+    ShareDialog.canShow(this.state.shareLinkContent).then(
+      function (canShow) {
+        if (canShow) {
+          return ShareDialog.show(tmp.state.shareLinkContent);
+        }
+      }
+    ).then(
+      function (result) {
+        if (result.isCancelled) {
+          alert('Share cancelled');
+        } else {
+          alert('Share success with postId: '
+            + result.postId);
+        }
+      },
+      function (error) {
+        alert('Share fail with error: ' + error);
+      }
+    );
+  }
   render() {
     console.log('TAG TEXT: ' + this.state.tagText);
     console.log('image source: ' + this.props.imageSource);
-    return <Captioned tagText={this.state.tagText}
-                      saveImage={this.saveImage}
-                      styles={styles} imageSource={this.props.imageSource}
-                      ref="captioned" />;
+    return <Captioned
+      tagText={this.state.tagText}
+      saveImage={this.saveImage}
+      styles={styles}
+      imageSource={this.props.imageSource}
+      ref="captioned"
+      facebookShare={this.shareLinkWithShareDialog}
+    />;
   }
 }
 
