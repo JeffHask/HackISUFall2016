@@ -25,8 +25,7 @@ export default class CaptionContainer extends Component {
       imageUrl: '',// <diff_path_for_ios>
       userGenerated: false,
       caption: 'hello'
-    }
-
+    },
       captions: ''
     };
     this.saveImage = this.saveImage.bind(this);
