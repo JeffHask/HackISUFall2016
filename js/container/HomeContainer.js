@@ -70,7 +70,7 @@ const styles = StyleSheet.create({
     paddingTop: 20,
     justifyContent: 'flex-start',
     alignItems: 'center',
-    backgroundColor: '#F5FCFF',
+    backgroundColor: '#EEEEEE',
   },
   image: {
     width: 350,

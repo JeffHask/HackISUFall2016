@@ -16,25 +16,38 @@ const {
   MKColor,
 } = MK;
 
+MK.setTheme({
+  primaryColor: '#7E57C2',
+  accentColor: MKColor.Teal
+});
 export default function Home(props) {
   const ColoredRaisedButton = MKButton.coloredButton()
     .withText('Select or Take Picture')
     .withOnPress(props.selectImage)
+    .withStyle()
     .build();
   const GenerateButton = MKButton.coloredButton()
-    .withText('Generate Picture')
+    .withText('Meme-ifai')
     .withOnPress(props.nextPage)
+    .withStyle({
+      height: 50
+    })
+    .withTextStyle({
+      color: 'white',
+      fontWeight: 'bold',
+      fontFamily: 'impact',
+      fontSize : 48
+    })
     .build();
   return (
     <View style={props.styles.container}>
         <ColoredRaisedButton  />
       {props.imageSource !== '' ?
-      <Image
+      <View><Image
         source={{uri: props.imageSource, isStatic: true}}
         style={props.styles.image}
       >
-      </Image> : <Text></Text> }
-      <GenerateButton />
+      </Image><GenerateButton /></View>: <Text></Text> }
     </View>
   );
 }

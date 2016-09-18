@@ -18,18 +18,14 @@ export default class CaptionContainer extends Component {
     Clarifai.getTagsByImageBytes(this.props.image.data).then(
       (res) => {
         this.setState({tagText:res.results[0].result.tag.classes.toString()});
-        // console.log(res);
-        // let request = new Request('https://captionserver.herokuapp.com/api/captions', {method: 'GET'});
-        airhorn.play((success) => {
-          if (success) {
-            console.log('successfully finished playing');
+        let airhorn = new Sound('airhorn.mp3', Sound.MAIN_BUNDLE, (e) => {
+          if (e) {
+            console.log('error');
           } else {
-            console.log('playback failed due to audio decoding errors');
+            console.log('duration', airhorn.getDuration());
+            airhorn.play();
           }
         });
-        // fetch(request).then(function (response) {
-        //   console.log(response);
-        // });
       },
       (error)=>{
         console.log(error);
@@ -43,8 +39,6 @@ export default class CaptionContainer extends Component {
   }
 }
 
-let airhorn = new Sound('./airhorn.mp3', Sound.MAIN_BUNDLE);
-
 const fontFamily = Platform.OS === 'ios' ? "HelveticaNeue-CondensedBold" : 'impact';
 const styles = StyleSheet.create({
   spinner : {
@@ -56,12 +50,13 @@ const styles = StyleSheet.create({
     paddingTop: 20,
     justifyContent: 'flex-start',
     alignItems: 'center',
-    backgroundColor: '#F5FCFF',
+    backgroundColor: '#EEEEEE'
   },
   image: {
     width: 400,
-    height:400,
-    marginTop: 20
+    height: 400,
+    marginTop: 50,
+    alignItems: 'center'
   },
   backdropViewTop: {
     height: 400,

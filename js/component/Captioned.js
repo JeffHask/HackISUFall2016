@@ -30,10 +30,10 @@ export default function Captioned({ tagText, styles, imageSource }) {
     </View>
   </Image> : <Text></Text>;
   return (
-    <View>
+    <View style={styles.container}>
     {tagText === '' ?<MKSpinner /> :
 
-        <View>
+        <View style={styles.container}>
           { imageComp }
           <Text>
             {tagText}

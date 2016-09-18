@@ -40,7 +40,7 @@ class HackISUFall2016 extends Component {
 
   nextPage() {
     this.props.toRoute({
-      name: "Here ya go, yarr",
+      name: "Here Do Be Meme",
       component: CaptionContainer
     });
   }
@@ -50,6 +50,7 @@ class HackISUFall2016 extends Component {
       <Router
         firstRoute={firstRoute}
         headerStyle={styles.header}
+        titleStyle={styles.title}
       />
     );
   }
@@ -57,12 +58,15 @@ class HackISUFall2016 extends Component {
 
 const styles = StyleSheet.create({
   header: {
-    backgroundColor: '#5cafec',
+    backgroundColor: '#7E57C2',
   },
+  title: {
+    alignSelf: 'center'
+  }
 });
 
 const firstRoute = {
-  name: 'Welcome!',
+  name: 'Aye Aye Caption',
   component: HomeContainer,
 };
 
