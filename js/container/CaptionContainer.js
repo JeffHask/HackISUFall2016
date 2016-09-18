@@ -123,7 +123,7 @@ export default class CaptionContainer extends Component {
   }
 
   shuffle() {
-    this.setState({shuffle: Math.floor(Math.random() * (15))});
+    this.setState({shuffle: Math.floor(Math.random() * (25))});
   }
 
   render() {
